@@ -13,7 +13,8 @@ interface FigletProps {
 
 async function loadFigletFont(font: string) {
   return new Promise<void>((resolve, reject) => {
-    figlet.loadFont(`${font}`, function (err) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    figlet.loadFont(`${font}` as any, function (err) {
       if (err) reject(err);
       else resolve();
     });
@@ -43,7 +44,8 @@ export function Figlet({ text, font, fontSize, spacing }: FigletProps) {
             font: font,
             horizontalLayout: spacing === 'compact' ? 'fitted' : 'default',
             verticalLayout: 'default',
-          },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any,
           (err, result) => {
             if (cancelled) return;
             setLoading(false);
